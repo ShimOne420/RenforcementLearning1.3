@@ -32,7 +32,7 @@ else
 end
 
 % Training Loop Parameters
-num_episodes = 385; % Total episodes for training
+num_episodes = 380; % Total episodes for training
 
 % Array to store cumulative rewards for each episode
 cumulative_rewards = zeros(num_episodes, 1); 
@@ -81,8 +81,8 @@ for episode = 1:num_episodes
         state_y = drone(2);
         
         % Make sure the state indices are within the grid bounds (1 to xrange and 1 to yrange)
-state_x = max(1, min(xrange, state_x));  % Clamping state_x to the valid range
-state_y = max(1, min(yrange, state_y));  % Clamping state_y to the valid range
+           state_x = max(1, min(xrange, state_x));  % Clamping state_x to the valid range
+           state_y = max(1, min(yrange, state_y));  % Clamping state_y to the valid range
 
         % Choose an action using epsilon-greedy strategy
         if rand < epsilon
@@ -110,14 +110,17 @@ state_y = max(1, min(yrange, state_y));  % Clamping state_y to the valid range
         moves = moves + 1; % Increment moves
 
        % Update Q-table using Q-learning formula
-       next_state_x = max(1, min(xrange, round(drone(1))));  % Ensure next_state_x is within bounds
-       next_state_y = max(1, min(yrange, round(drone(2))));  % Ensure next_state_y is within bounds
+          next_state_x = max(1, min(xrange, round(drone(1))));  % Ensure next_state_x is within bounds
+          next_state_y = max(1, min(yrange, round(drone(2))));  % Ensure next_state_y is within bounds
 
-       best_next_action = max(q_table(next_state_x, next_state_y, :));  % Get the best next action from Q-table
+          best_next_action = max(q_table(next_state_x, next_state_y, :));  % Get the best next action from Q-table
 
-% Q-learning update formula
-q_table(state_x, state_y, action) = (1 - alpha) * q_table(state_x, state_y, action) + ...
-    alpha * (reward + gamma * best_next_action);  % Update the Q-table
+    % Q-learning update formula
+
+          q_table(state_x, state_y, action) = (1 - alpha) * q_table(state_x, state_y, action) + ...
+          alpha * (reward + gamma * best_next_action);  % Update the Q-table
+
+    
         % Update drone visualization
         set(drone_plot, 'XData', drone(2), 'YData', drone(1));
         pause(0.1);
@@ -127,9 +130,9 @@ q_table(state_x, state_y, action) = (1 - alpha) * q_table(state_x, state_y, acti
     cumulative_rewards(episode) = episode_reward;
 
     disp(['Episode ', num2str(episode), ' completed with reward: ', num2str(episode_reward)]);
-end
+      end
 
-disp('Training completed.');
+     disp('Training completed.');
 
 % After the training loop, calculate the average reward
 if num_episodes > 1
