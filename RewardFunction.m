@@ -1,7 +1,7 @@
     function [reward, done] = RewardFunction(mazeMap, drone, goal, moves)
         % Inizializza la ricompensa e il flag di terminazione
         reward = -1; % Piccola penalità per ogni passo
-        done = false;
+        done = false;   
     
         % Verifica se il drone colpisce un muro
         if mazeMap(drone(1), drone(2)) == 1
